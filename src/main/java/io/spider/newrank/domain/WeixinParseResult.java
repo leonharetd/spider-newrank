@@ -2,9 +2,6 @@ package io.spider.newrank.domain;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/4/30.
- */
 public class WeixinParseResult {
     private boolean success;
     private List<WeixinData> value;

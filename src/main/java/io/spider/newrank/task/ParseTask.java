@@ -7,9 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-/**
- * Created by Administrator on 2017/4/30.
- */
 public abstract class ParseTask implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger(ParseTask.class);
 

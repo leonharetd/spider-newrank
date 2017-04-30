@@ -1,8 +1,6 @@
 package io.spider.newrank.task;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import io.spider.newrank.domain.WeixinParseResult;
 import io.spider.newrank.util.NewRankUtil;
 import io.spider.newrank.webclient.DataHandler;
@@ -12,9 +10,6 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Administrator on 2017/4/30.
- */
 public class WeixinParseTask extends ParseTask {
     private static final Logger logger = LoggerFactory.getLogger(WeixinParseTask.class);
     private String uri = "/xdnphb/list/day/rank";
@@ -57,7 +52,7 @@ public class WeixinParseTask extends ParseTask {
     class WeixinDataHandler implements DataHandler {
         @Override
         public void success(String data) {
-            logger.info("======={}", data);
+            logger.debug("======={}", data);
             WeixinParseResult result = JSON.parseObject(data, WeixinParseResult.class);
             if (result.isSuccess()) {
                 logger.debug("weixin value size = {}", result.getValue().size());
