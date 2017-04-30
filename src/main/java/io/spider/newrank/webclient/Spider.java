@@ -9,9 +9,6 @@ import io.vertx.ext.web.client.WebClientOptions;
 
 import java.util.Map;
 
-/**
- * Created by Administrator on 2017/4/30.
- */
 public class Spider extends AbstractVerticle {
     private String host;
     private int port = 80;

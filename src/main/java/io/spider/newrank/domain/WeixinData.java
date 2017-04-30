@@ -3,6 +3,9 @@ package io.spider.newrank.domain;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class WeixinData {
+    /**
+     * 名次
+     */
     @JSONField(name = "a")
     private String rank;
     /**

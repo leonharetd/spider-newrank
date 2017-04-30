@@ -2,9 +2,6 @@ package io.spider.newrank;
 
 import io.spider.newrank.task.WeixinParseTask;
 
-/**
- * Created by Administrator on 2017/4/30.
- */
 public class Main {
     public static void main(String[] args) {
         WeixinParseTask task = new WeixinParseTask();
