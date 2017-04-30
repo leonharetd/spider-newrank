@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 本地调试配置文件，不要提交 -->
+<configuration debug="false">
+    <property name="filters"
+              value="full,$Proxy,javax.crypto.Cipher,com.sun.,sun.reflect.,java.lang.reflect.,java.io.,java.net.,org.eclipse.jetty.,org.apache.cxf.,org.springframework.beans.,org.springframework.context.,org.apache.commons.httpclient.,org.apache.commons.pool.,org.apache.http.,io.netty.,org.junit.,org.apache.maven.,org.springframework.amqp.rabbit."/>
+    <property name="layout"
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %level [%thread] %logger{10} - %msg%n%xEx{${filters}}"/>
+    <property name="maxHistory" value="7"/>
+    <property name="maxFileSize" value="50MB"/>
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <charset>UTF-8</charset>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>${layout}</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="toLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>logs/server.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/server.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${maxFileSize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <charset>UTF-8</charset>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>${layout}</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="toMotanAccessLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>logs/motanAccess.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/motanAccess.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${maxFileSize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <charset>UTF-8</charset>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>${layout}</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="toMotanAccessLogAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="toMotanAccessLog"/>
+    </appender>
+
+    <appender name="toMotanServiceStatsLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>logs/motanServiceStats.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/motanServiceStats.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${maxFileSize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <charset>UTF-8</charset>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>${layout}</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="toMotanServiceStatsLogAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="toMotanServiceStatsLog"/>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="toLogFile"/>
+        <appender-ref ref="consoleAppender"/>
+    </root>
+
+    <logger name="accessLog" level="INFO" additivity="false">
+        <appender-ref ref="toMotanAccessLogAsync"/>
+    </logger>
+    <logger name="serviceStatsLog" level="INFO" additivity="false">
+        <appender-ref ref="toMotanServiceStatsLogAsync"/>
+    </logger>
+</configuration>
