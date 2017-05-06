@@ -19,3 +19,5 @@ target
 out
 .vertx
 *.iml
+
+logs
